@@ -1,5 +1,8 @@
 #!/bin/bash
 
+chmod 755 /var/www/
+chmod 755 /var/www/html 
+
 echo "Set server name"
 echo "ServerName localhost" | tee -a /etc/apache2/apache2.conf
 
@@ -11,4 +14,4 @@ a2enmod rewrite
 service apache2 reload
 
 echo "Script is finished!"
-exec "apache2-foreground"
+#exec "apache2-foreground"
