@@ -12,21 +12,15 @@ services:
       MYSQL_PASSWORD: "user1234"
 
   web:
-    image: php:7.2.5-apache
+    build:
+      context: .
+      dockerfile: Dockerfile
     volumes:
-      - ./www:/var/www/html
-      - ./configs/mods-available/:/usr/local/etc/php/modules/
-      - ./configs/hostfile:/etc/apache2/sites-available
-      - ./configs/inifiles:/usr/local/etc/php/conf.d
-      - ./configs/shell/web-get-install.sh:/script/apache-apt.sh
-      
+        - ${PWD}/www:/var/www/html
     ports:
       - "8000:80"
     depends_on:
       - db
-    command: 
-      - /script/apache-apt.sh
-    working_dir: /var/www/html
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
